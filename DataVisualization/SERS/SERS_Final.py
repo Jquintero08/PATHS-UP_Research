@@ -270,8 +270,52 @@ def Combo():
  
         
 
-Analysis()
-Combo()
+def create_popup(): #Uses PySimpleGUI
+    layout = [[sg.Button('Continue', key='-CONTINUE-', size=(10,2))],
+              [sg.Button('Exit', key='-EXIT-', size=(10,2))]]
+
+    window = sg.Window('Info', layout)
+
+    while True:
+        event, values = window.read()
+        if event == sg.WINDOW_CLOSED or event == '-EXIT-':
+            window.close()
+            return False #Return False = Exit code
+        elif event == '-CONTINUE-':
+            window.close()
+            return True #Return True = Continue doing more 
+        else:
+            sg.popup_cancel('User aborted')
+            return False
+
+def main(): 
+
+    loop = True
+    while loop:
+        layout = [
+            [sg.Text('Select one->'), sg.Listbox(['Combine Files', 'Data Analysis'], size=(20, 3), key='LB')],
+            [sg.Button('Ok'), sg.Button('Cancel')]
+        ]
+
+        window = sg.Window('Choose an option', layout)
+        event, values = window.read(close=True)
+
+        if event == 'Ok':
+            if 'Combine Files' in values['LB']:
+                print("Combining files...")
+                Combo() #Runs the Combo function
+                loop = create_popup()
+
+            elif 'Data Analysis' in values['LB']:
+                print("Performing data analysis...")
+                Analysis() #Runs the Analysis function
+                loop = create_popup()
+        else:
+            sg.popup_cancel('User aborted')
+            loop = False
+
+if __name__ == "__main__":
+    main()
 
     
     
