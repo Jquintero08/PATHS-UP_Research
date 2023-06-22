@@ -5,6 +5,7 @@ from scipy.signal import argrelextrema
 import tkinter as tk
 from tkinter import filedialog
 
+##This was a 2 day code
 
 root = tk.Tk()
 root.attributes('-alpha', 0.0)  #Makes extra window fully transparent
