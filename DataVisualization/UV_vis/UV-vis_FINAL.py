@@ -15,10 +15,10 @@ root.destroy()  #Destroys window
 df = pd.read_excel(filename)
 
 
-# Create a sample dataframe with header names
+#Create sample dataframe with header names
 header_names = [df.columns[0]]
 
-# Append every 5th header, starting from the 5th column
+#Append every 5th header, starting from the 5th column
 header_names += [df.columns[i] for i in np.arange(4, df.shape[1], 5)]
 
 
@@ -32,12 +32,12 @@ df.columns = header_names
 # Get the header name of the first column
 x_col = df.columns[0]
 
-# Iterating through all the columns in the DataFrame
+#Iterate through all columns in the DataFrame
 for i in range(1, df.shape[1]):
 
     plt.plot(df[x_col], df.iloc[:, i], label=df.columns[i])
 
-# Add a straight line
+#Add a straight line
 plt.axvline(x=785, color='black', linestyle='--')
 #plt.axvline(x=850, color='blue', linestyle=':')
 #plt.text(760, 0.3, '760', ha='right')
