@@ -232,11 +232,11 @@ def Analysis():
     
     
     
-    # plt.text(1206 -50, 18000, '[1206] \nC-H \nrocking of \ncyclohexene ring', ha='right')
-    # plt.text(1270 + 10, 15000, '[1270] \nC-H \nrocking of \nphenyl ring', ha='left')
-    # plt.text(1467 -10, 5000, '[1467] \nC=C \nbending of \nphenyl', ha='right')
+    #plt.text(1206 -50, 18000, '[1206] \nC-H \nrocking of \ncyclohexene ring', ha='right')
+    #plt.text(1270 + 10, 15000, '[1270] \nC-H \nrocking of \nphenyl ring', ha='left')
+    #plt.text(1467 -10, 5000, '[1467] \nC=C \nbending of \nphenyl', ha='right')
     
-    # plt.text(1515 + 50, 4500, '[1515] \nC-H \nstretching \nof phenyl', ha='left')
+    #plt.text(1515 + 50, 4500, '[1515] \nC-H \nstretching \nof phenyl', ha='left')
     
     ### Fix this later... Causes plot size to be irregular ###
     
@@ -362,15 +362,20 @@ def Analysis():
     
     ax.bar(x, highest_peaks, width=0.8, label='Highest Peak', tick_label=sample_names)
     #ax.errorbar(x, highest_peaks, yerr=std_highest_peak, fmt='none', ecolor='black', capsize=5)
-    ax.text(3,-5000, mean_label_highest, ha='right') 
+    ax.annotate(mean_label_highest, xy=(0.19, -0.12), xycoords='axes fraction', xytext=(-5, -5), textcoords='offset points', ha='right', va='top')
+    ### CHANGE ABOVE [INSIDE xy=(...,...)] X-AXIS TO MOVE LEFT AND RIGHT. Y DOESN'T NEED TO BE CHANGED ###
+    
     
     ax.bar(x + 20, second_highest_peaks, width=0.8, label='Second Highest Peak', tick_label=sample_names)
     #ax.errorbar(x + 20, second_highest_peaks, yerr=std_second_highest_peak, fmt='none', ecolor='black', capsize=5)
-    ax.text(23,-5000, mean_label_second_highest, ha='right')
+    ax.annotate(mean_label_second_highest, xy=(0.57, -0.12), xycoords='axes fraction', xytext=(-5, -5), textcoords='offset points', ha='right', va='top')
+    ### CHANGE ABOVE [INSIDE xy=(...,...)] X-AXIS TO MOVE LEFT AND RIGHT. Y DOESN'T NEED TO BE CHANGED ###
+    
     
     ax.bar(x + 10, third_highest_peaks, width=0.8, label='Third Highest Peak', tick_label=sample_names)
     #ax.errorbar(x + 10, third_highest_peaks, yerr=std_third_highest_peak, fmt='none', ecolor='black', capsize=5)
-    ax.text(13,-5000, mean_label_third_highest, ha='right')
+    ax.annotate(mean_label_third_highest, xy=(0.95, -0.12), xycoords='axes fraction', xytext=(-5, -5), textcoords='offset points', ha='right', va='top')
+    ### CHANGE ABOVE [INSIDE xy=(...,...)] X-AXIS TO MOVE LEFT AND RIGHT. Y DOESN'T NEED TO BE CHANGED ###
     
     
     

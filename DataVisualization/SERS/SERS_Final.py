@@ -5,7 +5,7 @@ from scipy.signal import argrelextrema
 import tkinter as tk
 from tkinter import filedialog
 import PySimpleGUI as sg
-from tkinter import messagebox
+
 
 
 
@@ -16,8 +16,22 @@ def Analysis():
     
     root = tk.Tk()
     root.attributes('-alpha', 0.0)  #Makes the extra window fully transparent
-    filename = filedialog.askopenfilename()  #Opens file dialog
-    root.destroy()  #Gets rid of the main window
+    
+    try:
+        filename = filedialog.askopenfilename()  #User picks which files
+        if not filename:  #If no file selected
+            raise ValueError('No files selected.')
+
+    except ValueError as e:
+        print(e)
+        return  #Exit
+
+    finally:
+        root.destroy()  #Destroys window
+        
+        
+        
+        
     
     df = pd.read_excel(filename, header=None)
     
@@ -208,15 +222,21 @@ def Analysis():
     
     ax.bar(x, highest_peaks, width=0.8, label='Highest Peak', tick_label=sample_names)
     #ax.errorbar(x, highest_peaks, yerr=std_highest_peak, fmt='none', ecolor='black', capsize=5)
-    ax.text(3,-5000, mean_label_highest, ha='right')
+    ax.annotate(mean_label_highest, xy=(0.19, -0.12), xycoords='axes fraction', xytext=(-5, -5), textcoords='offset points', ha='right', va='top')
+    ### CHANGE ABOVE [INSIDE xy=(...,...)] X-AXIS TO MOVE LEFT AND RIGHT. Y DOESN'T NEED TO BE CHANGED ###
+    
     
     ax.bar(x + 20, second_highest_peaks, width=0.8, label='Second Highest Peak', tick_label=sample_names)
     #ax.errorbar(x + 20, second_highest_peaks, yerr=std_second_highest_peak, fmt='none', ecolor='black', capsize=5)
-    ax.text(23,-5000, mean_label_second_highest, ha='right')
+    ax.annotate(mean_label_second_highest, xy=(0.57, -0.12), xycoords='axes fraction', xytext=(-5, -5), textcoords='offset points', ha='right', va='top')
+    ### CHANGE ABOVE [INSIDE xy=(...,...)] X-AXIS TO MOVE LEFT AND RIGHT. Y DOESN'T NEED TO BE CHANGED ###
+    
     
     ax.bar(x + 10, third_highest_peaks, width=0.8, label='Third Highest Peak', tick_label=sample_names)
     #ax.errorbar(x + 10, third_highest_peaks, yerr=std_third_highest_peak, fmt='none', ecolor='black', capsize=5)
-    ax.text(13,-5000, mean_label_third_highest, ha='right')
+    ax.annotate(mean_label_third_highest, xy=(0.95, -0.12), xycoords='axes fraction', xytext=(-5, -5), textcoords='offset points', ha='right', va='top')
+    ### CHANGE ABOVE [INSIDE xy=(...,...)] X-AXIS TO MOVE LEFT AND RIGHT. Y DOESN'T NEED TO BE CHANGED ###
+    
     
     
     
@@ -242,10 +262,21 @@ def Combo():
     
     root = tk.Tk()
     root.attributes('-alpha', 0.0)  #Makes the extra window fully transparent
-    filename = filedialog.askopenfilenames()  #Opens the file dialogue
-    root.destroy()  #Gets rid of the main window
-    filename = list(filename)
+    
+    try:
+        filename = filedialog.askopenfilenames()  #User picks which files
+        if not filename:  #If no file selected
+            raise ValueError('No files selected.')
 
+    except ValueError as e:
+        print(e)
+        return  #Exit
+
+    finally:
+        root.destroy()  #Destroys window
+        filename = list(filename) #Convers to list from Tuple
+    
+    
     if not filename:  # If there are no selected files, end the function
         print("No files selected.")
         return
@@ -262,11 +293,21 @@ def Combo():
     root = tk.Tk()
     root.attributes('-alpha', 0.0)  #Makes the extra window transparent
     #output_dir = filedialog.askdirectory()  #Opens the file dialog (For input in terminal)
-    outputFile = filedialog.asksaveasfilename(filetypes=[('Excel file', '*.xlsx')])
-    root.destroy()  #Gets rid of the main window
+    
+    try:
+        outputFile = filedialog.asksaveasfilename(filetypes=[('Excel file', '*.xlsx')])
+        if not outputFile:  #If no file selected
+            raise ValueError('No files selected.')
 
-    df.to_excel(outputFile, index=False)
-    print(df.shape)
+    except ValueError as e:
+        print(e)
+        return  #Exit
+
+    finally:
+        root.destroy()  #Removes window
+    
+
+    df.to_excel(outputFile, index=False, header=False)
  
         
 

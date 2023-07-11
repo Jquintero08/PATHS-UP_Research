@@ -10,14 +10,25 @@ from tkinter import messagebox
 def DI_Water():
     root = tk.Tk()
     root.attributes('-alpha', 0.0)  #Makes extra window fully transparent
-    input_file = filedialog.askopenfilename()  # Opens the file dialog
-    output_file = filedialog.asksaveasfilename(filetypes=[('Excel files', '*.xlsx'), ('CSV files', '*.csv')])  #Asks user for output file
-    root.destroy()  #Destroys window
+    
+    try:
+        inputFile = filedialog.askopenfilename()  #Opens compiled ethanol file
+        if not inputFile:  #If no file selected
+            raise ValueError('No input file selected.')
+
+        outputFile = filedialog.asksaveasfilename(filetypes=[('Excel files', '*.xlsx'), ('CSV files', '*.csv')])  #Asks user for output file
+        if not outputFile:  #If no file given to be created
+            raise ValueError('No output file given.')
+    except ValueError as e:
+        print(e)
+        return  #Exit
+
+    finally:
+        root.destroy()  #Destroys window
     
     
     
-    
-    data = pd.read_excel(input_file, skiprows=27)  #Read input .xlsx file & skip 27 rows like in flip_xlsx
+    data = pd.read_excel(inputFile, skiprows=27)  #Read input .xlsx file & skip 27 rows like in flip_xlsx
 
     #Check - Empty cells to stop
     empty_rows = data.index[data.iloc[:, 0].isnull()]
@@ -31,22 +42,38 @@ def DI_Water():
     
     di_water_row = di_water_row.transpose()[1:] #Transpose and skip first row which is the header
 
-    di_water_row.to_excel(output_file, index=False, header=False) #Writing DI water row to new excel file
+    di_water_row.to_excel(outputFile, index=False, header=False) #Writing DI water row to new excel file
     
-    print("DI Water Excel file has been saved as", output_file)
+    print("DI Water Excel file has been saved as", outputFile)
     
     
 
 def flip_xlsx():
     root = tk.Tk()
     root.attributes('-alpha', 0.0)  #Makes extra window fully transparent
-    input_file = filedialog.askopenfilename()  #Opens file dialog
-    DIWater_file = filedialog.askopenfilename()
-    output_file = filedialog.asksaveasfilename(filetypes=[('Excel files', '*.xlsx'), ('CSV files', '*.csv')])  #Asks user for output file
-    root.destroy()  #Destroys window
     
     
-    data = pd.read_excel(input_file, skiprows=27)  # Read input .xlsx file and skip 27 rows
+    try:
+        inputFile = filedialog.askopenfilename()  #Opens compiled ethanol file
+        if not inputFile:  #If no file selected
+            raise ValueError('No input file selected.')
+
+        DIWater_file = filedialog.askopenfilename()  #Opens file to shift
+        if not DIWater_file:  #If no file selected
+            raise ValueError('No DI-Water file selected.')
+
+        outputFile = filedialog.asksaveasfilename(filetypes=[('Excel files', '*.xlsx'), ('CSV files', '*.csv')])  #Asks user for output file
+        if not outputFile:  #If no file given to be created
+            raise ValueError('No output file given.')
+    except ValueError as e:
+        print(e)
+        return  #Exit
+
+    finally:
+        root.destroy()  #Destroys window
+    
+    
+    data = pd.read_excel(inputFile, skiprows=27)  # Read input .xlsx file and skip 27 rows
 
     #Check for empty cells to stop
     empty_rows = data.index[data.iloc[:, 0].isnull()]
@@ -56,10 +83,10 @@ def flip_xlsx():
 
     transposedData = data.transpose()  #FLips x and y
     transposedData.columns = [None] * len(transposedData.columns)  #Remove unnecessary numbering
-    transposedData.to_excel(output_file, index=False, header=False)  #Write to output, keeping index
+    transposedData.to_excel(outputFile, index=False, header=False)  #Write to output, keeping index
 
     #Add average & standard deviation columns
-    data2 = pd.read_excel(output_file)
+    data2 = pd.read_excel(outputFile)
     cols = data2.columns.tolist()
 
     data3 = pd.DataFrame()
@@ -78,11 +105,11 @@ def flip_xlsx():
         for col in np.arange(4, len(data3.columns), 5):
             data3.iloc[0:133, col] = data3.iloc[0:133, col].values - DIWater_data.iloc[0:133, 0].values  #Subtracts row by row
 
-    data3.to_excel(output_file, index=False)
+    data3.to_excel(outputFile, index=False)
         
 
     
-    print("Flipped Excel file has been saved as", output_file)
+    print("Flipped Excel file has been saved as", outputFile)
     
 
 
