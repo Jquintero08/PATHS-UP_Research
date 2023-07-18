@@ -281,10 +281,10 @@ def Combo():
         print("No files selected.")
         return
 
-    # Process the first file
+    #Process first file
     df = pd.read_csv(filename[0], skiprows=17, usecols=[0, 1], header = None)
 
-    # Process the remaining files
+    #Process remaining files
     for file in filename[1:]:
         new_df = pd.read_csv(file, skiprows=17, usecols=[1], header = None)
         df = pd.concat([df, new_df], axis=1)
