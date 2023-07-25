@@ -34,7 +34,7 @@ x_col = df.columns[0]
 diffs = []
 
 # Iterating through all the columns in the DataFrame
-for i in range(5, df.shape[1]):
+for i in range(1, df.shape[1]):
 
     plt.plot(df[x_col], df.iloc[:, i], label=df.columns[i])
     
@@ -99,7 +99,7 @@ plt.show()
 
 
 plt.figure(figsize=(10,6))
-plt.plot(df.columns[5:df.shape[1]], diffs, marker='o')
+plt.plot(df.columns[1:df.shape[1]], diffs, marker='o')
 plt.xlabel('Samples')
 plt.ylabel('Difference in x-values')
 plt.title('Difference in x-values at Half Max for Each Column')
@@ -111,7 +111,7 @@ plt.show()
 df = df[(df[x_col] >= 350) & (df[x_col] <= 1000)]
 
 # Plot all the spectra with the first column as the x-axis
-for i in range(5, df.shape[1]):
+for i in range(1, df.shape[1]):
     # Fit a polynomial to the data
     z = np.polyfit(df[x_col], df.iloc[:, i], 1)
     p = np.poly1d(z)
@@ -153,7 +153,7 @@ print('')
 diffs = [] #Redeclare diffs
 
 # Plot all the normalized spectra with the first column as the x-axis
-for i in range(5, df.shape[1]):
+for i in range(1, df.shape[1]):
     # Fit a polynomial to the data
     z = np.polyfit(df[x_col], df.iloc[:, i], 1)
     p = np.poly1d(z)
@@ -221,7 +221,7 @@ plt.show()
 
 
 plt.figure(figsize=(10,6))
-plt.plot(df.columns[5:df.shape[1]], diffs, marker='o')
+plt.plot(df.columns[1:df.shape[1]], diffs, marker='o')
 
 
 

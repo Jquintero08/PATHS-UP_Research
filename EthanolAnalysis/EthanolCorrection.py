@@ -133,7 +133,7 @@ def percentChange():
 
     df_sample = pd.concat([x_axis, df_sample], axis=1) #Concatenate the wavelength column and data columns to the file
 
-    df_sample.to_excel(outputFile, index=False, header=False) #Export to outputFile
+    df_sample.to_excel(outputFile, index=False, header=False) #Export to outputFile and finish
     
     print("Success!")
 
