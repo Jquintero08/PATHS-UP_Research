@@ -4,7 +4,7 @@ Progress of programs throughout my time apart of PATHS-UP program.
 
 # CombinationOfFiles
 
-This folder includes a program and sample files for testing. The program prompts the user to choose a directory for the master folder, then scours as deep as possible within it for .csv files. If the master folder contains subfolders, each becomes its own worksheet within a single .xlsx document. The program reads .csv files from each subfolder, appends necessary data to the respective worksheet, and repeats this process for all subfolders or until no more .csv files are available. The result is a singule .xlsx file with each subfolder represented as a worksheet. Each worksheet contains multiple datasets, with the first two columns representing one dataset, and each column thereafter representing an additional dataset
+This folder includes a program and sample files for testing. The program prompts the user to choose a directory for the master folder, then scours as deep as possible within it for similar .csv files. If the master folder contains subfolders, each becomes its own worksheet within a single .xlsx document. The program reads .csv files from each subfolder, appends necessary data to the respective worksheet, and repeats this process for all subfolders or until no more .csv files are available. The result is a singule .xlsx file with each subfolder represented as a worksheet. Each worksheet contains multiple datasets, with the first two columns representing one dataset, and each column thereafter representing an additional dataset
 
 
 
